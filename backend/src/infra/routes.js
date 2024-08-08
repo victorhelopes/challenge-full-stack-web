@@ -6,6 +6,7 @@ const routes = Router();
 
 routes.get("/findAll", StudentController.findAll);
 routes.get("/findStudent/:ra", StudentController.getStudentByRA);
+routes.get("/filterStudent/:name", StudentController.filterStudentByName);
 
 routes.post("/create", StudentController.createStudent);
 

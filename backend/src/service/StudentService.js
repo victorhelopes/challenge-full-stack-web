@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const Students = require("../models/Student");
 const { cpfValidator } = require("../utils/cpfValidator");
 const { emailValidator } = require("../utils/emailValidator");
@@ -20,6 +21,18 @@ module.exports = {
         }
         const result = await Students.create({ ra, cpf, email, name })
         return result;
+    },
+
+    
+    async filterStudentByName(name){
+        const student = await Students.findAll({ 
+            where: { 
+                name: {
+                    [Op.like]: `%${name}%`
+                }
+            }
+        })
+        return student
     },
 
     async findStudentByRA(ra){
