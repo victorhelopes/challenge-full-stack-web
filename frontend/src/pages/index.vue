@@ -1,5 +1,20 @@
 <template>
   <Section class="pa-5" title="Alunos">
+    <v-row
+      class="justify-space-between ma-0"
+    >
+      <v-col
+        cols="12"
+        md="8"
+      >
+        <Search
+          @searchFunction="(value)=>{
+            this.filterStudents(value)
+          }"
+        />
+      </v-col>
+    </v-row>
+
     <v-table>
       <thead fixed-header>
         <tr>
@@ -41,6 +56,7 @@
 
 <script>
 import { api } from '@/services';
+import { filterStudentsByName } from '@/services/api/filterStudentsByName';
 import { getStudents } from '@/services/api/getStudents';
 
   export default {
@@ -50,12 +66,28 @@ import { getStudents } from '@/services/api/getStudents';
       }
     },
 
-    async created(){
-      const response = await getStudents()
+    methods:{
+      async getAllStudents(){
+        const response = await getStudents()
         if(response.data){
           this.students = response.data
           return true
         }
+      },
+      async filterStudents(name){
+        if(name.length === 0){
+          this.getAllStudents()
+          return ;
+        }
+        const response = await filterStudentsByName(name)
+        if(response.status === 200){
+          this.students = response.data
+        }
+      }
+    },
+
+    async created(){
+      this.getAllStudents()
     }
   }
 </script>
