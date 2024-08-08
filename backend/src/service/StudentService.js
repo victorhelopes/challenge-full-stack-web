@@ -25,5 +25,10 @@ module.exports = {
     async findStudentByRA(ra){
         const student = await Students.findByPk(ra)
         return student
+    },
+
+    async deleteStudent(ra){
+        const result = await Students.destroy({ where: { ra: ra}})
+        return result
     }
 }
