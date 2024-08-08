@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: victorhelopes
+      POSTGRES_PASSWORD: victor
+      POSTGRES_DB: challenge
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_USER=victorhelopes
+      - DB_PASS=victor
+      - DB_NAME=challenge
+    volumes:
+      - .:/usr/src/app
+    command: npm start
+
+volumes:
+  pgdata:
