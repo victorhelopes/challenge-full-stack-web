@@ -44,9 +44,12 @@
             <button>
               [Editar]
             </button>
-            <button>
-              [Excluir]
-            </button>
+            <DialogModal
+              buttonText="[Exlcuir]"
+              buttonConfirm="Exlcuir"
+              cardText="Deseja excluir aluno?"
+              @confirmAction="deleteStudent(student.ra)"
+            />
           </td>
         </tr>
       </tbody>
@@ -56,6 +59,7 @@
 
 <script>
 import { api } from '@/services';
+import { deleteStudent } from '@/services/api/deleteStudent';
 import { filterStudentsByName } from '@/services/api/filterStudentsByName';
 import { getStudents } from '@/services/api/getStudents';
 
@@ -74,6 +78,7 @@ import { getStudents } from '@/services/api/getStudents';
           return true
         }
       },
+
       async filterStudents(name){
         if(name.length === 0){
           this.getAllStudents()
@@ -83,7 +88,15 @@ import { getStudents } from '@/services/api/getStudents';
         if(response.status === 200){
           this.students = response.data
         }
-      }
+      },
+
+      async deleteStudent(studentId){
+        const response = await deleteStudent(studentId)  
+        if(response.status === 200){
+          this.getAllStudents();
+          return;
+        }
+    }
     },
 
     async created(){
