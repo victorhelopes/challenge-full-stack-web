@@ -1,5 +1,7 @@
 const Sequelize = require("sequelize");
 
+const student = require('../../models/Student')
+
 const connection = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
@@ -9,5 +11,7 @@ const connection = new Sequelize(
         dialect: process.env.DB_DIALECT
     }
 );
+
+student.init(connection)
 
 module.exports = connection;
