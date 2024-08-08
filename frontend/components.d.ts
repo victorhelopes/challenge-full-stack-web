@@ -7,11 +7,13 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Dialog: typeof import('./src/components/components/dialog/index.vue')['default']
     DialogModal: typeof import('./src/components/dialogModal/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./src/components/search/index.vue')['default']
     Section: typeof import('./src/components/section/index.vue')['default']
+    Sidebar: typeof import('./src/components/sidebar/index.vue')['default']
     TitleHeader: typeof import('./src/components/titleHeader/index.vue')['default']
   }
 }
