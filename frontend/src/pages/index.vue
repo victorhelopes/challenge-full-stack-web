@@ -52,7 +52,11 @@
           <td>{{ student.name }}</td>
           <td>{{ student.cpf }}</td>
           <td>
-            <button>
+            <button
+              @click="()=>{
+                goToPage(`editStudent/${student.ra}`)
+              }"
+            >
               [Editar]
             </button>
             <DialogModal
