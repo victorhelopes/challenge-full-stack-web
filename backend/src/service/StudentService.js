@@ -30,5 +30,10 @@ module.exports = {
     async deleteStudent(ra){
         const result = await Students.destroy({ where: { ra: ra}})
         return result
+    },
+
+    async updateStudent({email, name}, ra){
+        const result = await Students.update({ email, name }, { where: { ra: ra}})
+        return result
     }
 }

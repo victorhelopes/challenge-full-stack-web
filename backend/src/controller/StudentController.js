@@ -46,5 +46,18 @@ module.exports = {
         return response.status(500).json({ message: e.message });
       return response.status(500).json({ message: 'Unknown Error.' });
     } 
-  }
+  },
+
+  async updateStudent(request, response){
+    try{
+      const { ra } = request.params;
+      const { email, name } = request.body;
+      const result = await StudentService.updateStudent({name, email}, ra)
+      return response.json(result);
+    }catch(e){
+      if (e instanceof Error)
+        return response.status(500).json({ message: e.message });
+      return response.status(500).json({ message: 'Unknown Error.' });
+    }  
+  },
 }
