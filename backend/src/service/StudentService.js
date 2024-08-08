@@ -22,4 +22,8 @@ module.exports = {
         return result;
     },
 
+    async findStudentByRA(ra){
+        const student = await Students.findByPk(ra)
+        return student
+    }
 }
