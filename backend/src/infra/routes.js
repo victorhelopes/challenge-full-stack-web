@@ -1,17 +1,22 @@
 const  Router = require('express');
 
 const StudentController = require('../controller/StudentController');
+const UserController = require('../controller/UserController');
+const { authenticateToken } = require('../middleware/auth');
 
 const routes = Router();
 
-routes.get("/findAll", StudentController.findAll);
-routes.get("/findStudent/:ra", StudentController.getStudentByRA);
-routes.get("/filterStudent/:name", StudentController.filterStudentByName);
+routes.post('/createUser', UserController.createUser);
+routes.post('/login', UserController.LoginUser);
 
-routes.post("/create", StudentController.createStudent);
+routes.get("/findAll", authenticateToken ,StudentController.findAll);
+routes.get("/findStudent/:ra", authenticateToken, StudentController.getStudentByRA);
+routes.get("/filterStudent/:name",authenticateToken, StudentController.filterStudentByName);
 
-routes.delete("/delete/:ra", StudentController.destroyStudent);
+routes.post("/create",authenticateToken, StudentController.createStudent);
 
-routes.put("/update/:ra", StudentController.updateStudent);
+routes.delete("/delete/:ra",authenticateToken, StudentController.destroyStudent);
+
+routes.put("/update/:ra",authenticateToken, StudentController.updateStudent);
 
 module.exports = routes;

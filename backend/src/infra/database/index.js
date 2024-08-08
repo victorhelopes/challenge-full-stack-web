@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 
 const student = require('../../models/Student')
+const user = require('../../models/User')
 
 const connection = new Sequelize(
     process.env.DB_NAME,
@@ -13,5 +14,6 @@ const connection = new Sequelize(
 );
 
 student.init(connection)
+user.init(connection)
 
 module.exports = connection;
