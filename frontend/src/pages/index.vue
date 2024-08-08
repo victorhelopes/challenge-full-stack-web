@@ -13,6 +13,17 @@
           }"
         />
       </v-col>
+      <v-col
+        cols="12"
+        md="4"
+        class="d-flex justify-md-end pl-0"
+      >
+        <v-btn
+          @click="()=>{goToPage('createStudent')}"
+        >
+            Cadastrar Aluno
+        </v-btn>
+      </v-col>
     </v-row>
 
     <v-table>
@@ -71,6 +82,10 @@ import { getStudents } from '@/services/api/getStudents';
     },
 
     methods:{
+      goToPage(path) {
+        this.$router.push(`/${path}`);
+      },
+
       async getAllStudents(){
         const response = await getStudents()
         if(response.data){
